@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "candidati",
+  "info": {
+    "singularName": "candidato",
+    "pluralName": "candidati",
+    "displayName": "Candidato",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "candidature": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::candidatura.candidatura"
+    },
+    "colloqui": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::colloquio.colloquio"
+    },
+    "feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feedback.feedback"
+    },
+    "tests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::test.test"
+    },
+    "preferenzas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::preferenza.preferenza"
+    },
+    "candidatura": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::candidatura.candidatura",
+      "mappedBy": "candidato"
+    },
+    "preferenza": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::preferenza.preferenza",
+      "mappedBy": "candidato"
+    },
+    "Tentativo": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::test.test",
+      "mappedBy": "Tentativi"
+    },
+    "nome_utente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "candidato"
+    },
+    "CV": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    }
+  }
+}

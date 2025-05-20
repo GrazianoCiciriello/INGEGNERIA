@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifiche",
+  "info": {
+    "singularName": "notifica",
+    "pluralName": "notifiche",
+    "displayName": "Notifica",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Messaggio": {
+      "type": "text"
+    },
+    "Data": {
+      "type": "date"
+    },
+    "Stato": {
+      "type": "enumeration",
+      "enum": [
+        "Letta",
+        "Non letta"
+      ]
+    },
+    "Utente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "notifica"
+    }
+  }
+}

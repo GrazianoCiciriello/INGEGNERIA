@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "risposte",
+  "info": {
+    "singularName": "risposta",
+    "pluralName": "risposte",
+    "displayName": "Risposta",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Testo": {
+      "type": "string"
+    },
+    "Corrretta": {
+      "type": "boolean"
+    },
+    "domanda": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::domanda.domanda",
+      "inversedBy": "risposta"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "offerte_lavoro",
+  "info": {
+    "singularName": "offerta-lavoro",
+    "pluralName": "offerte-lavoro",
+    "displayName": "OffertaLavoro",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Titolo": {
+      "type": "string"
+    },
+    "Descrizione": {
+      "type": "text"
+    },
+    "DataPubblicazione": {
+      "type": "date"
+    },
+    "azienda": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::azienda.azienda",
+      "inversedBy": "offerta_lavoro"
+    },
+    "candidaturas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::candidatura.candidatura"
+    },
+    "candidatura": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::candidatura.candidatura",
+      "mappedBy": "offerta_lavoro"
+    }
+  }
+}

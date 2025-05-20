@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "domande",
+  "info": {
+    "singularName": "domanda",
+    "pluralName": "domande",
+    "displayName": "Domanda",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Testo": {
+      "type": "string"
+    },
+    "Tipo": {
+      "type": "enumeration",
+      "enum": [
+        "Chiusa",
+        "Aperta",
+        "Multipla"
+      ]
+    },
+    "rispostas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::risposta.risposta"
+    },
+    "test": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::test.test",
+      "inversedBy": "domanda"
+    },
+    "risposta": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::risposta.risposta",
+      "mappedBy": "domanda"
+    }
+  }
+}

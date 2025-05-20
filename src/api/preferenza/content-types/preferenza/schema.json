@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "preferenze",
+  "info": {
+    "singularName": "preferenza",
+    "pluralName": "preferenze",
+    "displayName": "Preferenza ",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Area_Interesse": {
+      "type": "enumeration",
+      "enum": [
+        "- Amministrazione",
+        "- Agricoltura",
+        "- Arte e Cultura",
+        "- Comunicazione",
+        "- Consulenza",
+        "- Design",
+        "- Educazione e Formazione",
+        "- Economia e Finanza",
+        "- Edilizia e Costruzioni",
+        "- Energia e Ambiente",
+        "- Giornalismo",
+        "- Informatica e Tecnologia",
+        "- Ingegneria Civile",
+        "- Ingegneria Elettronica",
+        "- Ingegneria Meccanica",
+        "- Marketing e Vendite",
+        "- Medicina e Sanità",
+        "- Moda e Abbigliamento",
+        "- Produzione e Manifattura",
+        "- Ricerca e Sviluppo",
+        "- Risorse Umane",
+        "- Scienze Naturali",
+        "- Servizi alla Persona",
+        "- Sicurezza e Vigilanza",
+        "- Sport e Tempo Libero",
+        "- Telecomunicazioni",
+        "- Trasporti e Logistica",
+        "- Turismo e Ospitalità"
+      ]
+    },
+    "localita": {
+      "type": "string"
+    },
+    "Tipo_Contratto": {
+      "type": "enumeration",
+      "enum": [
+        "Tempo Indeterminato",
+        "Tempo Determinato",
+        "Contratto a Progetto (Co.Co.Pro)",
+        "Apprendistato",
+        "Part-Time",
+        "Full-Time",
+        "Stage / Tirocinio",
+        "Somministrazione",
+        "Collaborazione Occasionale",
+        "Contratto Interinale",
+        "Contratto di Prestazione Occasionale",
+        "Contratto di Lavoro Autonomo",
+        "Freelance / Consulenza",
+        "Contratto a Chiamata",
+        "Contratto di Inserimento",
+        "Contratto di Formazione e Lavoro"
+      ]
+    },
+    "candidato": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::candidato.candidato",
+      "inversedBy": "preferenza"
+    }
+  }
+}
