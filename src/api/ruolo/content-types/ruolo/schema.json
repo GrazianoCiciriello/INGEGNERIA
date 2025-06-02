@@ -16,10 +16,11 @@
       "required": false,
       "default": "Null"
     },
-    "users_permissions_users": {
+    "TipoUtente": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "plugin::users-permissions.user"
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "Tipo"
     },
     "descrizione": {
       "type": "string",

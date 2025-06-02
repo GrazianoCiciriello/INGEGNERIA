@@ -403,6 +403,10 @@ export interface ApiAmministratoreAmministratore
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    Nome_Utente: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -425,6 +429,7 @@ export interface ApiAziendaAzienda extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    Descrizione: Schema.Attribute.Text;
     feedbacks: Schema.Attribute.Relation<'oneToMany', 'api::feedback.feedback'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -454,6 +459,36 @@ export interface ApiAziendaAzienda extends Struct.CollectionTypeSchema {
     recruiters: Schema.Attribute.Relation<
       'oneToMany',
       'api::recruiter.recruiter'
+    >;
+    Settore: Schema.Attribute.Enumeration<
+      [
+        'Agricoltura',
+        'Alimentare',
+        'Automotive',
+        'Bancario',
+        'Commercio',
+        'Costruzioni',
+        'Design',
+        'Energia',
+        'Farmaceutico',
+        'Finanza',
+        'Gestione rifiuti',
+        'Hotelleria',
+        'ICT',
+        'Industria manifatturiera',
+        'Logistica',
+        'Marketing',
+        'Media',
+        'Moda',
+        'Pubblica amministrazione',
+        'Sanit\u00E0',
+        'Servizi',
+        'Telecomunicazioni',
+        'Trasporti',
+        'Turismo',
+        'Edilizia',
+        'Educazione',
+      ]
     >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -490,16 +525,17 @@ export interface ApiCandidatoCandidato extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     CV: Schema.Attribute.Media<'images' | 'files'>;
     feedbacks: Schema.Attribute.Relation<'oneToMany', 'api::feedback.feedback'>;
+    ID_Utente: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::candidato.candidato'
     > &
       Schema.Attribute.Private;
-    nome_utente: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
+    Nome_Utente: Schema.Attribute.String;
     preferenza: Schema.Attribute.Relation<
       'oneToOne',
       'api::preferenza.preferenza'
@@ -509,7 +545,7 @@ export interface ApiCandidatoCandidato extends Struct.CollectionTypeSchema {
       'api::preferenza.preferenza'
     >;
     publishedAt: Schema.Attribute.DateTime;
-    Tentativo: Schema.Attribute.Relation<'oneToMany', 'api::test.test'>;
+    Tentativi: Schema.Attribute.Relation<'oneToMany', 'api::test.test'>;
     tests: Schema.Attribute.Relation<'oneToMany', 'api::test.test'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -932,6 +968,10 @@ export interface ApiRecruiterRecruiter extends Struct.CollectionTypeSchema {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    Nome_Utente: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -995,13 +1035,13 @@ export interface ApiRuoloRuolo extends Struct.CollectionTypeSchema {
       'plugin::users-permissions.user'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    TipoUtente: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users_permissions_users: Schema.Attribute.Relation<
-      'oneToMany',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -1017,6 +1057,10 @@ export interface ApiTestTest extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    candidato: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::candidato.candidato'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1026,10 +1070,6 @@ export interface ApiTestTest extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::test.test'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    Tentativi: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::candidato.candidato'
-    >;
     Titolo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1556,8 +1596,10 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     ruolo: Schema.Attribute.Relation<'oneToOne', 'api::ruolo.ruolo'>;
-    Tipo_Utente: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'Candidato'>;
+    Tipo: Schema.Attribute.Relation<'oneToOne', 'api::ruolo.ruolo'>;
+    TipoUtente: Schema.Attribute.Enumeration<
+      ['Candidato', 'Azienda ', 'Amministratore', 'Recruiter']
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

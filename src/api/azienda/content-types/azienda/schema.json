@@ -49,6 +49,40 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "azienda"
+    },
+    "Settore": {
+      "type": "enumeration",
+      "enum": [
+        "Agricoltura",
+        "Alimentare",
+        "Automotive",
+        "Bancario",
+        "Commercio",
+        "Costruzioni",
+        "Design",
+        "Energia",
+        "Farmaceutico",
+        "Finanza",
+        "Gestione rifiuti",
+        "Hotelleria",
+        "ICT",
+        "Industria manifatturiera",
+        "Logistica",
+        "Marketing",
+        "Media",
+        "Moda",
+        "Pubblica amministrazione",
+        "Sanità",
+        "Servizi",
+        "Telecomunicazioni",
+        "Trasporti",
+        "Turismo",
+        "Edilizia",
+        "Educazione"
+      ]
+    },
+    "Descrizione": {
+      "type": "text"
     }
   }
 }

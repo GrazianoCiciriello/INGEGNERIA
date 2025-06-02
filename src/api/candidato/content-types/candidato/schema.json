@@ -48,17 +48,18 @@
       "target": "api::preferenza.preferenza",
       "mappedBy": "candidato"
     },
-    "Tentativo": {
+    "Tentativi": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::test.test",
-      "mappedBy": "Tentativi"
+      "mappedBy": "candidato"
     },
-    "nome_utente": {
+    "ID_Utente": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "candidato"
+      "inversedBy": "candidato",
+      "onDelete":"cascade"
     },
     "CV": {
       "type": "media",
@@ -68,6 +69,9 @@
         "images",
         "files"
       ]
+    },
+    "Nome_Utente": {
+      "type": "string"
     }
   }
-}
+} 

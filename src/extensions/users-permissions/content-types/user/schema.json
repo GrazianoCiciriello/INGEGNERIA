@@ -65,13 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-"Tipo_Utente": {
-  "type": "string",
-  "enum": ["Candidato", "Azienda", "Altro"],
-  "default": "Candidato"
-}
-
-,
     "notifiche": {
       "type": "relation",
       "relation": "oneToMany",
@@ -122,12 +115,6 @@
       "target": "api::azienda.azienda",
       "mappedBy": "nome_utente"
     },
-    "candidato": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::candidato.candidato",
-      "mappedBy": "nome_utente"
-    },
     "amministratore": {
       "type": "relation",
       "relation": "oneToOne",
@@ -139,6 +126,27 @@
       "relation": "oneToOne",
       "target": "api::recruiter.recruiter",
       "mappedBy": "Nome_Utente"
+    },
+    "TipoUtente": {
+      "type": "enumeration",
+      "enum": [
+        "Candidato",
+        "Azienda ",
+        "Amministratore",
+        "Recruiter"
+      ]
+    },
+    "Tipo": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ruolo.ruolo",
+      "mappedBy": "TipoUtente"
+    },
+    "candidato": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::candidato.candidato",
+      "mappedBy": "ID_Utente"
     }
   }
 }

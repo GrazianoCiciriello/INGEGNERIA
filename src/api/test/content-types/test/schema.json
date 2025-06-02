@@ -19,11 +19,11 @@
       "relation": "oneToMany",
       "target": "api::domanda.domanda"
     },
-    "Tentativi": {
+    "candidato": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::candidato.candidato",
-      "inversedBy": "Tentativo"
+      "inversedBy": "Tentativi"
     },
     "domanda": {
       "type": "relation",
