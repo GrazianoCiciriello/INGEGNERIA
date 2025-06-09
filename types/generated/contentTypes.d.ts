@@ -568,6 +568,7 @@ export interface ApiCandidatoCandidato extends Struct.CollectionTypeSchema {
         'Altro',
       ]
     >;
+    ProfiloAttitudinale: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     Tentativi: Schema.Attribute.Relation<'oneToMany', 'api::test.test'>;
     tests: Schema.Attribute.Relation<'oneToMany', 'api::test.test'>;

@@ -101,6 +101,9 @@
         "Imprenditoria",
         "Altro"
       ]
+    },
+    "ProfiloAttitudinale": {
+      "type": "text"
     }
   }
 }
