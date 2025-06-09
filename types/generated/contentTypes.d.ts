@@ -443,10 +443,6 @@ export interface ApiAziendaAzienda extends Struct.CollectionTypeSchema {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    offerta_lavoro: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::offerta-lavoro.offerta-lavoro'
-    >;
     offerta_lavoros: Schema.Attribute.Relation<
       'oneToMany',
       'api::offerta-lavoro.offerta-lavoro'
@@ -543,6 +539,34 @@ export interface ApiCandidatoCandidato extends Struct.CollectionTypeSchema {
     preferenzas: Schema.Attribute.Relation<
       'oneToMany',
       'api::preferenza.preferenza'
+    >;
+    Preferenze: Schema.Attribute.Enumeration<
+      [
+        'Informatica e Software',
+        'Ingegneria',
+        'Sanit\u00E0',
+        'Educazione e Formazione',
+        'Marketing e Comunicazione',
+        'Vendite e Servizio Clienti',
+        'Finanza e Contabilit\u00E0',
+        'Risorse Umane',
+        'Legale e Giuridico',
+        'Amministrazione e Segreteria',
+        'Arte e Design',
+        'Media e Giornalismo',
+        'Costruzioni e Architettura',
+        'Scienza e Ricerca',
+        'Produzione e Manifattura',
+        'Logistica e Trasporti',
+        'Turismo e Ospitalit\u00E0',
+        'Agricoltura e Ambiente',
+        'Servizi Sociali',
+        'Sicurezza e Difesa',
+        'Sport e Benessere',
+        'Pubblica Amministrazione',
+        'Imprenditoria',
+        'Altro',
+      ]
     >;
     publishedAt: Schema.Attribute.DateTime;
     Tentativi: Schema.Attribute.Relation<'oneToMany', 'api::test.test'>;
@@ -816,7 +840,6 @@ export interface ApiOffertaLavoroOffertaLavoro
     draftAndPublish: true;
   };
   attributes: {
-    azienda: Schema.Attribute.Relation<'oneToOne', 'api::azienda.azienda'>;
     candidatura: Schema.Attribute.Relation<
       'oneToOne',
       'api::candidatura.candidatura'
@@ -965,10 +988,6 @@ export interface ApiRecruiterRecruiter extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     nome_utente: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    Nome_Utente: Schema.Attribute.Relation<
       'oneToOne',
       'plugin::users-permissions.user'
     >;

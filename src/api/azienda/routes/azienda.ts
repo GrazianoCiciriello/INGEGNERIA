@@ -2,6 +2,17 @@
  * azienda router
  */
 
-import { factories } from '@strapi/strapi';
 
-export default factories.createCoreRouter('api::azienda.azienda');
+export default {
+  routes: [
+    {
+      method: 'GET',
+      path: '/aziende',
+      handler: 'api::azienda.azienda.find',
+      config: {
+        auth: false,
+        policies: [],
+      },
+    },
+  ],
+};

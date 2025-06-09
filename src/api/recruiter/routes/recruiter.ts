@@ -2,6 +2,16 @@
  * recruiter router
  */
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::recruiter.recruiter');
+export default {
+  routes: [
+    {
+      method: 'GET',
+      path: '/recruiter',
+      handler: 'api::recruiter.recruiter.find',
+      config: {
+        auth: false,
+        policies: [],
+      },
+    },
+  ],
+};

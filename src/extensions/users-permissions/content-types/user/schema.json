@@ -121,12 +121,6 @@
       "target": "api::amministratore.amministratore",
       "mappedBy": "Nome_Utente"
     },
-    "recruiter": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::recruiter.recruiter",
-      "mappedBy": "Nome_Utente"
-    },
     "TipoUtente": {
       "type": "enumeration",
       "enum": [
@@ -147,6 +141,12 @@
       "relation": "oneToOne",
       "target": "api::candidato.candidato",
       "mappedBy": "ID_Utente"
+    },
+    "recruiter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::recruiter.recruiter",
+      "mappedBy": "nome_utente"
     }
   }
 }

@@ -1,7 +1,23 @@
-/**
- * recruiter controller
- */
+export default {
+  async find(ctx: any) {
+    try {
+      const user = ctx.state.user;
+      if (!user) {
+        return ctx.unauthorized('Utente non autenticato');
+      }
+      const userId = user.id;
 
-import { factories } from '@strapi/strapi'
+      const recruiter = await strapi.entityService.findMany('api::recruiter.recruiter', {
+        filters: {
+          nome_utente: {
+            id: userId
+          }
+        }
+      });
 
-export default factories.createCoreController('api::recruiter.recruiter');
+      ctx.body = recruiter;
+    } catch (err) {
+      ctx.throw(500, 'Errore nel recupero dei recruiter');
+    }
+  },
+};

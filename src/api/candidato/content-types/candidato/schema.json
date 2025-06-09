@@ -59,7 +59,7 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "candidato",
-      "onDelete":"cascade"
+      "onDelete": "cascade"
     },
     "CV": {
       "type": "media",
@@ -72,6 +72,35 @@
     },
     "Nome_Utente": {
       "type": "string"
+    },
+    "Preferenze": {
+      "type": "enumeration",
+      "enum": [
+        "Informatica e Software",
+        "Ingegneria",
+        "Sanità",
+        "Educazione e Formazione",
+        "Marketing e Comunicazione",
+        "Vendite e Servizio Clienti",
+        "Finanza e Contabilità",
+        "Risorse Umane",
+        "Legale e Giuridico",
+        "Amministrazione e Segreteria",
+        "Arte e Design",
+        "Media e Giornalismo",
+        "Costruzioni e Architettura",
+        "Scienza e Ricerca",
+        "Produzione e Manifattura",
+        "Logistica e Trasporti",
+        "Turismo e Ospitalità",
+        "Agricoltura e Ambiente",
+        "Servizi Sociali",
+        "Sicurezza e Difesa",
+        "Sport e Benessere",
+        "Pubblica Amministrazione",
+        "Imprenditoria",
+        "Altro"
+      ]
     }
   }
-} 
+}

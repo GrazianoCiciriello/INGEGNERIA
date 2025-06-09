@@ -43,12 +43,6 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "recruiter"
-    },
-    "Nome_Utente": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "recruiter"
     }
   }
 }

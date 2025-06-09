@@ -1,3 +1,4 @@
+
 import { factories } from '@strapi/strapi';
 
 export default factories.createCoreService('api::candidato.candidato', ({ strapi }) => ({
@@ -18,13 +19,31 @@ export default factories.createCoreService('api::candidato.candidato', ({ strapi
     }
   },
   //elimina candidato (chiamato in elimina user)
- async eliminaCandidatoByUserId(user: any) {
-    const candidato = await strapi.entityService.findMany('api::candidato.candidato', {
-      filters: { ID_Utente: user },
+async eliminaByUserId(userId: number) {
+  try {
+    const candidati = await strapi.entityService.findMany('api::candidato.candidato', {
+      filters: {
+        ID_Utente: {
+          id: {
+            $eq: userId,
+          },
+        },
+      },
     });
 
-    if (candidato.length > 0) {
-      await strapi.entityService.delete('api::candidato.candidato', candidato[0].id);
+    if (candidati.length > 0) {
+      for (const candidato of candidati) {
+        await strapi.entityService.delete('api::candidato.candidato', candidato.id);
+        strapi.log.info(`Candidato con utente ID ${userId} eliminato.`);
+      }
+    } else {
+      strapi.log.info(`Nessun candidato trovato con utente ID ${userId}`);
     }
+  } catch (err) {
+    strapi.log.error('Errore durante eliminazione candidato:', err);
+    throw err;
   }
+}
+
+
 }));

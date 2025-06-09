@@ -11,5 +11,6 @@ export default (plugin: any) => {
   // Aggiungi le rotte custom all'API content-api
   plugin.routes['content-api'].routes.push(...customUserRoutes.routes);
 
+
   return plugin;
 };

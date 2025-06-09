@@ -20,12 +20,6 @@
     "DataPubblicazione": {
       "type": "date"
     },
-    "azienda": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::azienda.azienda",
-      "inversedBy": "offerta_lavoro"
-    },
     "candidaturas": {
       "type": "relation",
       "relation": "oneToMany",

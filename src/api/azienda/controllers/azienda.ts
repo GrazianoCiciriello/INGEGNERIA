@@ -2,6 +2,15 @@
  * azienda controller
  */
 
-import { factories } from '@strapi/strapi'
 
-export default factories.createCoreController('api::azienda.azienda');
+export default {
+  async find(ctx: any) {
+    try {
+      const aziende = await strapi.entityService.findMany('api::azienda.azienda', {
+      });
+      ctx.body = aziende;
+    } catch (err) {
+      ctx.throw(500, 'Errore nel recupero delle aziende');
+    }
+  },
+};
