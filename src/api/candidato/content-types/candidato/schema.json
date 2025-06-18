@@ -1,0 +1,117 @@
+{
+  "kind": "collectionType",
+  "collectionName": "candidati",
+  "info": {
+    "singularName": "candidato",
+    "pluralName": "candidati",
+    "displayName": "Candidato",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "candidature": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::candidatura.candidatura"
+    },
+    "colloqui": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::colloquio.colloquio",
+      "mappedBy": "candidato"
+    },
+    "feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feedback.feedback"
+    },
+    "tests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::test.test"
+    },
+    "preferenzas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::preferenza.preferenza"
+    },
+    "candidatura": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::candidatura.candidatura",
+      "mappedBy": "candidato"
+    },
+    "preferenza": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::preferenza.preferenza",
+      "mappedBy": "candidato"
+    },
+    "Tentativi": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::test.test",
+      "mappedBy": "candidato"
+    },
+    "ID_Utente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "candidato",
+      "onDelete": "cascade"
+    },
+    "CV": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "Nome_Utente": {
+      "type": "string"
+    },
+    "Preferenze": {
+      "type": "enumeration",
+      "enum": [
+        "Informatica e Software",
+        "Ingegneria",
+        "Sanità",
+        "Educazione e Formazione",
+        "Marketing e Comunicazione",
+        "Vendite e Servizio Clienti",
+        "Finanza e Contabilità",
+        "Risorse Umane",
+        "Legale e Giuridico",
+        "Amministrazione e Segreteria",
+        "Arte e Design",
+        "Media e Giornalismo",
+        "Costruzioni e Architettura",
+        "Scienza e Ricerca",
+        "Produzione e Manifattura",
+        "Logistica e Trasporti",
+        "Turismo e Ospitalità",
+        "Agricoltura e Ambiente",
+        "Servizi Sociali",
+        "Sicurezza e Difesa",
+        "Sport e Benessere",
+        "Pubblica Amministrazione",
+        "Imprenditoria",
+        "Altro"
+      ]
+    },
+    "ProfiloAttitudinale": {
+      "type": "text"
+    },
+    
+    "offertePreferite": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::offerta-lavoro.offerta-lavoro",
+      "inversedBy": "candidatiChePreferiscono"
+    }
+  }
+}

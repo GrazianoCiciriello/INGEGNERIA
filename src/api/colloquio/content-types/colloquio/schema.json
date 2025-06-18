@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "colloqui",
+  "info": {
+    "singularName": "colloquio",
+    "pluralName": "colloqui",
+    "displayName": "Colloquio",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Data": {
+      "type": "date"
+    },
+
+    "candidato": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::candidato.candidato",
+      "inversedBy": "colloqui"
+    },
+    "offerta_lavoro": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::offerta-lavoro.offerta-lavoro",
+      "inversedBy": "colloqui_associati"
+    },
+    
+    "Esito": {
+      "type": "enumeration",
+      "enum": [
+        "Superato",
+        "Non superato",
+        "In attesa",
+        "Annullato",
+        "Rinviato"
+      ]
+    },
+    "Tipo": {
+      "type": "enumeration",
+      "enum": [
+        "Reale",
+        "Simulato",
+        "Telefonico",
+        "Videochiamata",
+        "In presenza",
+        "Tecnico",
+        "HR (risorse umane)",
+        "Panel (colloquio con più intervistatori)"
+      ]
+    }
+  }
+}

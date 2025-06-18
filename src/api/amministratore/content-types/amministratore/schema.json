@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "amministratori",
+  "info": {
+    "singularName": "amministratore",
+    "pluralName": "amministratori",
+    "displayName": "amministratore",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "log_attivitas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::log-attivita.log-attivita"
+    },
+    "nome_utente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "amministratore"
+    },
+    "Nome_Utente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "amministratore"
+    }
+  }
+}

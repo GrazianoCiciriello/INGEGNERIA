@@ -1,0 +1,82 @@
+{
+  "kind": "collectionType",
+  "collectionName": "aziende",
+  "info": {
+    "singularName": "azienda",
+    "pluralName": "aziende",
+    "displayName": "Azienda",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Nome_Azienda": {
+      "type": "string"
+    },
+    "recruiters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::recruiter.recruiter"
+    },
+    "feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feedback.feedback"
+    },
+    "offerta_lavoros": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::offerta-lavoro.offerta-lavoro"
+    },
+    "recruiter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::recruiter.recruiter",
+      "mappedBy": "aziendas"
+    },
+    "Luogo": {
+      "type": "string"
+    },
+    "nome_utente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "azienda"
+    },
+    "Settore": {
+      "type": "enumeration",
+      "enum": [
+        "Agricoltura",
+        "Alimentare",
+        "Automotive",
+        "Bancario",
+        "Commercio",
+        "Costruzioni",
+        "Design",
+        "Energia",
+        "Farmaceutico",
+        "Finanza",
+        "Gestione rifiuti",
+        "Hotelleria",
+        "ICT",
+        "Industria manifatturiera",
+        "Logistica",
+        "Marketing",
+        "Media",
+        "Moda",
+        "Pubblica amministrazione",
+        "Sanità",
+        "Servizi",
+        "Telecomunicazioni",
+        "Trasporti",
+        "Turismo",
+        "Edilizia",
+        "Educazione"
+      ]
+    },
+    "Descrizione": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "log_attivitas",
+  "info": {
+    "singularName": "log-attivita",
+    "pluralName": "log-attivitas",
+    "displayName": "LogAttività",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "logattivita": {
+      "type": "enumeration",
+      "enum": [
+        "Login",
+        "Logout",
+        "Creazione",
+        "Modifica",
+        "Cancellazione",
+        "Pubblicazione",
+        "Approvazione",
+        "Rifiuto",
+        "Invio Feedback",
+        "Visualizzazione",
+        "Cambio Ruolo",
+        "Assegnazione"
+      ]
+    },
+    "data": {
+      "type": "date"
+    },
+    "Nome_Utente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "log_attivita"
+    }
+  }
+}

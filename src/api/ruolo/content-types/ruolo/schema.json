@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ruoli",
+  "info": {
+    "singularName": "ruolo",
+    "pluralName": "ruoli",
+    "displayName": "Ruolo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "NomeRuolo": {
+      "type": "string",
+      "required": false,
+      "default": "Null"
+    },
+    "TipoUtente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "Tipo"
+    },
+    "descrizione": {
+      "type": "string",
+      "default": "Null"
+    },
+    "NomeUtente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "ruolo"
+    }
+  }
+}

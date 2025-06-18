@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "offerte_lavoro",
+  "info": {
+    "singularName": "offerta-lavoro",
+    "pluralName": "offerte-lavoro",
+    "displayName": "OffertaLavoro",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Titolo": {
+      "type": "string",
+      "required": true
+    },
+    "requisiti": {
+      "type": "richtext"
+    },
+    "Descrizione": {
+      "type": "text"
+    },
+    "DataPubblicazione": {
+      "type": "date"
+    },
+     "orarioLavoro": {
+      "type": "string"
+    },
+    "modalitaLavoro": {
+      "type": "enumeration",
+      "enum": ["Remoto", "Ibrido", "InSede", "Flessibile"]
+    },
+    "tipoContratto": {
+      "type": "enumeration",
+      "enum": ["Full-time", "Part-time", "Tempo Determinato", "Tempo Indeterminato", "Stage", "Apprendistato", "Consulenza/Freelance"]
+    },
+    "retribuzionePrevista": {
+      "type": "text"
+    },
+    "azienda": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::azienda.azienda",
+      "inversedBy": "offerta_lavoros"
+    },
+    "candidaturas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::candidatura.candidatura",
+      "mappedBy": "offerta_lavoro"
+    },
+    "candidatura": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::candidatura.candidatura",
+      "mappedBy": "offerta_lavoro"
+    },
+    "statoOfferta": {
+      "type": "enumeration",
+      "enum": ["attiva", "chiusa", "in revisione"],
+      "default": "attiva"
+    },
+
+    "candidatiChePreferiscono": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::candidato.candidato",
+      "mappedBy": "offertePreferite",
+      "private": true
+},
+    "colloqui_associati": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::colloquio.colloquio",
+      "mappedBy": "offerta_lavoro"
+    }
+
+  }
+}
