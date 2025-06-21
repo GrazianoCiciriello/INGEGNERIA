@@ -22,7 +22,8 @@
     "feedbacks": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::feedback.feedback"
+      "target": "api::feedback.feedback",
+      "mappedBy":"azienda_target"
     },
     "offerta_lavoros": {
       "type": "relation",

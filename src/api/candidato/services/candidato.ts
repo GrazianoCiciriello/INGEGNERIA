@@ -316,4 +316,80 @@ export default factories.createCoreService('api::candidato.candidato', ({ strapi
       // Restituisce la lista delle candidature
       return candidatoRecord.candidature;
     },
+     /**
+     * Recupera le testimonianze (feedback) per una specifica azienda.
+     * @param aziendaId - L'ID dell'azienda per cui recuperare le testimonianze.
+     */
+    async getTestimonianzePerAzienda(aziendaId: number) {
+      if (!aziendaId) {
+        throw new Error("ID dell'azienda non fornito.");
+      }
+
+      const azienda = await strapi.entityService.findOne(
+        "api::azienda.azienda",
+        aziendaId
+      );
+      if (!azienda) {
+        throw new Error(`Azienda con ID ${aziendaId} non trovata.`);
+      }
+
+      // Assuming 'feedback' is the correct API ID for your feedback collection type
+      // And 'azienda_target' is the field in your feedback schema linking to the azienda
+      const testimonianze = await strapi.entityService.findMany(
+        "api::feedback.feedback",
+        {
+          filters: {
+            azienda_target: { id: aziendaId }, // This is line 233 (approximately)
+            // Potresti voler aggiungere altri filtri, ad esempio per un 'tipoFeedback' == 'testimonianza'
+            // tipoFeedback: "Testimonianza", // Se hai un campo del genere
+          } as any,
+          populate: { mittente: { fields: ["username", "id"] } }, // Popola i dati del mittente se vuoi mostrarli
+        }
+      );
+
+      if (!testimonianze || testimonianze.length === 0) {
+        return ["Nessuna testimonianza trovata"]; // O un messaggio che indica nessuna testimonianza
+      }
+
+      return testimonianze;
+    },
+    /**
+     * Recupera le simulazioni di colloquio per l'utente candidato specificato.
+     * @param userId - L'ID dell'utente (collegato al candidato).
+     */
+    async getSimulazioniColloqui(userId: number) {
+      if (!userId) {
+        throw new Error("ID dell'utente non fornito.");
+      }
+
+      // 1. Trova il record "Candidato" associato all'utente.
+      const candidati = await strapi.entityService.findMany(
+        "api::candidato.candidato",
+        {
+          filters: {
+            ID_Utente: { id: userId }, // Assicurati che 'ID_Utente' sia il nome corretto della relazione
+          },
+          populate: { colloqui: true }, // Popola la relazione 'colloqui'
+        }
+      );
+
+      if (!candidati || candidati.length === 0) {
+        throw new Error(
+          `Nessun profilo candidato trovato per l'utente con ID ${userId}.`
+        );
+      }
+
+      const candidatoRecord = candidati[0] as any; // Cast to any to access populated relations easily
+
+      if (!candidatoRecord.colloqui || candidatoRecord.colloqui.length === 0) {
+        return ["Nessuna testimonianza trovata"]; // Nessun colloquio associato
+      }
+
+      // 2. Filtra i colloquia per quelli di tipo "Simulato"
+      const simulazioniColloqui = candidatoRecord.colloqui.filter(
+        (colloquio: any) => colloquio.Tipo === "Simulato" // Assicurati che "Simulato" sia il valore esatto nell'enum
+      );
+
+      return simulazioniColloqui;
+    },
 }));

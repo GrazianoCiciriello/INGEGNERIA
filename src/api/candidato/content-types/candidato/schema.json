@@ -112,6 +112,18 @@
       "relation": "manyToMany",
       "target": "api::offerta-lavoro.offerta-lavoro",
       "inversedBy": "candidatiChePreferiscono"
+    },
+    "candidato_partecipante": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::candidato.candidato",
+      "inversedBy": "colloqui"
+    },
+    "offerta_lavoro_associata": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::offerta-lavoro.offerta-lavoro",
+      "mappedBy": "candidati_associati"
     }
   }
 }

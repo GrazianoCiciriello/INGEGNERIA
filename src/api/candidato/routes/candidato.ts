@@ -87,5 +87,23 @@ export default {
         // policies: ['global::is-candidato'], // Esempio se hai una policy per assicurare che l'utente sia 'Candidato'
       },
     },
+        {
+      method: "GET",
+      path: "/candidati/testimonianze/azienda/:aziendaId", // Candidate accesses testimonials for a specific company
+      handler: "candidato.accedereTestimonianzeAziendali", // Points to the controller action
+      config: {
+        auth: {}, // Richiede autenticazione. Rimuovi se le testimonianze sono pubbliche.
+        // policies: [], // Aggiungi policy se necessario (es. 'global::is-candidato')
+      },
+    },
+    {
+      method: "GET",
+      path: "/candidati/me/simulazioni-colloqui", // Logged-in candidate accesses their simulated interviews
+      handler: "candidato.accedereSimulazioneColloqui",
+      config: {
+        auth: {}, // Requires authentication
+        // policies: ['global::is-candidato'], // Esempio se hai una policy specifica
+      },
+    },
   ],
 };

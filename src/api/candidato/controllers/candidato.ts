@@ -361,6 +361,96 @@ export default factories.createCoreController(
         );
       }
     },
+    //Accedere T  estimonianze? 
+    async accedereTestimonianzeAziendali(ctx) {
+      try {
+        const { aziendaId } = ctx.params; // ID dell'azienda dalla URL
+        const { user } = ctx.state; // Utente autenticato (opzionale, se la rotta è protetta)
+
+        // Opzionale: verifica se l'utente è autenticato e ha il ruolo appropriato se necessario
+        // if (!user) {
+        //   return ctx.unauthorized("Devi essere autenticato per visualizzare le testimonianze.");
+        // }
+
+        if (!aziendaId) {
+          return ctx.badRequest(
+            "ID dell'azienda mancante nei parametri della richiesta."
+          );
+        }
+        const aziendaIdNumber = parseInt(aziendaId, 10);
+        if (isNaN(aziendaIdNumber)) {
+          return ctx.badRequest("ID dell'azienda non valido.");
+        }
+
+        const testimonianze = await strapi
+          .service("api::candidato.candidato")
+          .getTestimonianzePerAzienda(aziendaIdNumber);
+
+        // Sanitize and transform response
+        // Se le testimonianze sono pubbliche e non contengono dati sensibili diretti del candidato,
+        // la sanitizzazione potrebbe non essere necessaria allo stesso modo di dati personali
+        // Tuttavia, è buona norma trasformare la risposta.
+        return this.transformResponse(testimonianze);
+      } catch (error) {
+        strapi.log.error(
+          "Errore durante l'accesso alle testimonianze aziendali:",
+          error
+        );
+        if (error.message.includes("non trovat")) {
+          // "non trovata" o "non fornito"
+          return ctx.notFound(error.message);
+        }
+        return ctx.internalServerError(
+          "Errore interno del server durante l'accesso alle testimonianze."
+        );
+      }
+    },
+    async accedereSimulazioneColloqui(ctx) {
+      try {
+        const { user } = ctx.state; // Utente autenticato dal token JWT
+
+        if (!user) {
+          return ctx.unauthorized(
+            "Devi essere autenticato per accedere alle simulazioni di colloquio."
+          );
+        }
+
+        // Assicurati che l'utente abbia il ruolo 'candidato'
+        // (Questo codice è simile a quello in `compilareProfiloAttitudinale` e potrebbe essere rifattorizzato in una policy o helper)
+        const populatedUser = (await strapi.entityService.findOne(
+          "plugin::users-permissions.user",
+          user.id,
+          { populate: ["role"] }
+        )) as PopulatedUser; // Interfaccia PopulatedUser definita in cima al file
+
+        if (populatedUser.role?.name?.toLowerCase() !== "candidato") {
+          return ctx.forbidden(
+            "Solo gli utenti candidati possono accedere alle simulazioni di colloquio."
+          );
+        }
+
+        const simulazioni = await strapi
+          .service("api::candidato.candidato")
+          .getSimulazioniColloqui(user.id);
+
+        const sanitizedSimulazioni = await this.sanitizeOutput(
+          simulazioni,
+          ctx
+        );
+        return this.transformResponse(sanitizedSimulazioni);
+      } catch (error) {
+        strapi.log.error(
+          "Errore durante l'accesso alle simulazioni di colloquio:",
+          error
+        );
+        if (error.message.includes("Nessun profilo candidato trovato")) {
+          return ctx.notFound(error.message);
+        }
+        return ctx.internalServerError(
+          "Errore interno del server durante l'accesso alle simulazioni di colloquio."
+        );
+      }
+    }
   })
 
   
